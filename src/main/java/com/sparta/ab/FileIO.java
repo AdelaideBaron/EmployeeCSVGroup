@@ -19,7 +19,7 @@ public class FileIO {
 
             for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
                 String[] args = line.split(",");
-                arrayToSort.add(new EmployeeDTO(args));
+                arrayToSort.add(new EmployeeDTO(args)); //each line of array is an employeeDTO
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

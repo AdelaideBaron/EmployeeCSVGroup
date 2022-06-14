@@ -3,7 +3,6 @@ package com.sparta.ab;
 public class EmployeeDTO {
 
 
-
     // DTO - Data Transfer Object
     private String empId;
     private String namePrefix;
@@ -12,7 +11,7 @@ public class EmployeeDTO {
     private String lastName;
     private String gender;
     private String email;
-    private String dob; //private LocalDate dob;
+    private String dob;
     private String dateOfJoining;
     private String salary;
 
@@ -71,5 +70,77 @@ public class EmployeeDTO {
 
     public void setEmpId(String empId) {
         this.empId = empId;
+    }
+
+    public String getNamePrefix() {
+        return namePrefix;
+    }
+
+    public void setNamePrefix(String namePrefix) {
+        this.namePrefix = namePrefix;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleInitial() {
+        return middleInitial;
+    }
+
+    public void setMiddleInitial(String middleInitial) {
+        this.middleInitial = middleInitial;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getDateOfJoining() {
+        return dateOfJoining;
+    }
+
+    public void setDateOfJoining(String dateOfJoining) {
+        this.dateOfJoining = dateOfJoining;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
     }
 }
