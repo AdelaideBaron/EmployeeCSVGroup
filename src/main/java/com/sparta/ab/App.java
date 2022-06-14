@@ -7,7 +7,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        String file = "src/main/resources/EmployeeRecords.csv";
+        String file = "src/main/resources/EmployeeRecordsSecond.csv";
 
         ArrayList<EmployeeDTO> arrayToFilter = FileIO.readFromFile(file);
 
@@ -16,7 +16,7 @@ public class App
 
         EmployeeCollection.setEmployees(arrayToFilter); //this sets the data to empDTO
 //        System.out.println(EmployeeCollection.getCorruptList());
-        System.out.println(EmployeeCollection.getCorruptedByDup());
+//        System.out.println(EmployeeCollection.getCorruptedByFutureDates());
 
         //need a way to pass the 'clean array' through to each next method
 
