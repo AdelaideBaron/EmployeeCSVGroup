@@ -62,6 +62,7 @@ public class EmployeeCollection {
     public static void checkForFutureDates() {
         //for now, it seems safe to say that anyone with DOB >=2022 is 'corrupt' - check range/dates with customer
         String yearCurrent = new String("2022");
+        int corruptCount = 0;
         int yearCurrents = 2022;
         for (EmployeeDTO employee : employees) {
             String dob = employee.getDob();
