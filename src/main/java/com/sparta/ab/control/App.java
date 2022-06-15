@@ -1,11 +1,10 @@
-package com.sparta.ab;
+package com.sparta.ab.control;
 
 
 
 
 import com.sparta.ab.model.EmployeeCollection;
 import com.sparta.ab.model.EmployeeDTO;
-import com.sparta.ab.control.FileIO;
 
 import java.util.ArrayList;
 
@@ -17,11 +16,17 @@ public class App
 
         ArrayList<EmployeeDTO> arrayToFilter = FileIO.readFromFile(file);
 
-        EmployeeCollection.setEmployees(arrayToFilter);
-        EmployeeCollection.checkInitials();
-        EmployeeCollection.checkGender();
-        EmployeeCollection.checkForFutureDates();
-        EmployeeCollection.checkForDuplicateIDs();
+        EmployeeCollection.setOriginalEmployees(arrayToFilter);
+
+        EmployeeCollection.checkAllCorruptions();
+
+      //  System.out.println(EmployeeCollection.getSize() ); //checking size of array
+
+
+  //      EmployeeCollection.checkInitials();
+//        EmployeeCollection.checkGender();
+ //       EmployeeCollection.checkForFutureDates();
+ //       EmployeeCollection.checkForDuplicateIDs();
 
 
         //this sets the data to empDTO

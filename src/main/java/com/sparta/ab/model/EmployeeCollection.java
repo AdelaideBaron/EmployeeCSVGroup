@@ -1,7 +1,6 @@
 package com.sparta.ab.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.logging.Level;
 
 import static com.sparta.ab.logging.LogConfig.logger;
@@ -10,106 +9,159 @@ public class EmployeeCollection {
 
 
 
-    private static ArrayList<EmployeeDTO> employees = new ArrayList<>();
+    private static ArrayList<EmployeeDTO> originalEmployees = new ArrayList<>();
     private static ArrayList<EmployeeDTO> corruptList = new ArrayList<>();
 
-    public static ArrayList<EmployeeDTO> getEmployees() { //gets the array of employees
-        return employees;
+    private static ArrayList<EmployeeDTO> cleanSet = new ArrayList<>();
+
+    public static ArrayList<EmployeeDTO> getOriginalEmployees() { //gets the array of employees
+        logger.log(Level.INFO, "Obtain array of employees");
+        return originalEmployees;
     }
 
-    public static void setEmployees(ArrayList<EmployeeDTO> employees) {
-        EmployeeCollection.employees = employees;
+    public static void setOriginalEmployees(ArrayList<EmployeeDTO> originalEmployees) {
+        logger.log(Level.FINE, "Set employee");
+        EmployeeCollection.originalEmployees = originalEmployees;
     }
 
-    private static HashSet<EmployeeDTO> cleanSet = new HashSet<>();
+ //   private static HashSet<EmployeeDTO> cleanSet = new HashSet<>();
     //hashsets contain unique values
 
     public static ArrayList<EmployeeDTO> getCorruptList() {
+        logger.log(Level.INFO, "Obtain array of corrupt employee entries");
         return corruptList;
     }
 
     public static EmployeeDTO getCorruptListElement(int element) {
+        logger.log(Level.INFO, "Obtain element from corrupt list");
         return corruptList.get(element);
     }
 
-    public static ArrayList<EmployeeDTO> getCorruptListByDup() {
-        checkForDuplicateIDs();
+    public static ArrayList<EmployeeDTO> getCorruptListByDup(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.INFO, "Obtain list of employees corrupted by duplicate ID");
+        checkForDuplicateIDs(employeeListToCheckForCorruptions);
         return corruptList;
     }
 
-    public static int getCorruptedByDup() {
-        checkForDuplicateIDs();
+    public static int getCorruptedByDup(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.FINE, "Obtain amount of employees corrupted by duplicate ID");
+        checkForDuplicateIDs(employeeListToCheckForCorruptions);
         return corruptList.size();
     }
 
-    public static void checkForDuplicateIDs() {
+    public static void checkForDuplicateIDs(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.INFO, "Checking for duplicated IDs");
         int corruptCount = 0;
-        for (EmployeeDTO employee : employees) {
-            for (EmployeeDTO employeeTwo : employees) {
-                if (employee != employeeTwo && employee.getEmpId().equals(employeeTwo.getEmpId()))
+        for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            for (EmployeeDTO employeeTwo : employeeListToCheckForCorruptions) {
+                logger.log(Level.FINE, "comparing each employee ID against each other");
+                if (employee != employeeTwo && employee.getEmpId().equals(employeeTwo.getEmpId())) {
                     corruptCount++;
                     corruptList.add(employee);
+                    removeFromClean(employee);
+                } else {
+                    logger.log(Level.FINE, "adding clean data");
+                    cleanSet.add(employee);
+                }
             }
         }
         logger.log(Level.INFO, "All records checked for duplicate empId, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static int getCorruptedByFutureDates() {
-        checkForFutureDates();
+    public static int getCorruptedByFutureDates(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.FINE, "Obtain amount of employees with dob in future");
+        checkForFutureDates(employeeListToCheckForCorruptions);
         return corruptList.size();
     }
 
-    public static void checkForFutureDates() {
+    public static void checkForFutureDates(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.INFO, "Checking for dob in future");
         //for now, it seems safe to say that anyone with DOB >=2022 is 'corrupt' - check range/dates with customer
         String yearCurrent = new String("2022");
         int corruptCount = 0;
         int yearCurrents = 2022;
-        for (EmployeeDTO employee : employees) {
+        for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            logger.log(Level.FINE, "checking individual employeeID");
             String dob = employee.getDob();
             String yearOB = dob.substring(6); //will matter if / in there
             if (Integer.parseInt(yearOB) >= yearCurrents) {
                 corruptList.add(employee);
+                corruptCount++;
+                removeFromClean(employee);
+            } else {
+                logger.log(Level.FINE, "adding clean data");
+                cleanSet.add(employee);
             }
         }
 
         logger.log(Level.INFO, "All records checked for dob in future, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static int getAmountCorruptedByGender(){
-        checkGender();
+    public static int getAmountCorruptedByGender(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
+        logger.log(Level.FINE, "Obtain amount of employees with invalid gender");
+        checkGender(employeeListToCheckForCorruptions);
         return corruptList.size();
     }
 
-    public static void checkGender() {
+    public static void checkGender(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.INFO, "Checking for invalid gender");
         int corruptCount = 0;
-        for (EmployeeDTO employee : employees) {
+        for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
             if (!employee.getGender().equals("F") && employee.getGender().equals("M")) {
+                logger.log(Level.FINE, "checking individual employee gender");
                 corruptCount++;
                 corruptList.add(employee);
+                removeFromClean(employee);
+            } else {
+                logger.log(Level.FINE, "adding clean data");
+                cleanSet.add(employee);
             }
         }
         logger.log(Level.INFO, "All records checked for invalid gender, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static int getAmountCorruptedByInitials(){
-        checkInitials();
+    public static int getAmountCorruptedByInitials(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
+        logger.log(Level.FINE, "Obtain amount of employees with invalid intiials");
+        checkInitials(employeeListToCheckForCorruptions);
         return corruptList.size();
     }
 
-    public static void checkInitials(){
+    public static void checkInitials(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
+        logger.log(Level.INFO, "Checking for invalid intials");
         int corruptCount = 0;
-        for(EmployeeDTO employee : employees){
+        for(EmployeeDTO employee : employeeListToCheckForCorruptions){
             if(employee.getMiddleInitial().equals("FALSE")){
+                logger.log(Level.FINE, "checking individual employee initial");
                 corruptCount ++;
                 corruptList.add(employee);
+                removeFromClean(employee);
+            } else {
+                logger.log(Level.FINE, "adding clean data");
+                cleanSet.add(employee);
             }
         }
         logger.log(Level.INFO, "All records checked for 'FALSE' initials, " + corruptCount + " moved to dirty data list.");
     }
 
+    private static void removeFromClean(EmployeeDTO employee) {
+        logger.log(Level.FINE, "Removing corrupted data from clean list, different corruption found");
+        if(cleanSet.contains(employee)){
+            cleanSet.remove(cleanSet.indexOf(employee));
+        }
+    }
 
-    public static int getSize() {
-        return employees.size();
+
+    public static int getSize(ArrayList<EmployeeDTO> employeeListToSize) {
+        logger.log(Level.INFO, "Obtain amount of employees");
+        return employeeListToSize.size();
+    }
+
+    public static void checkAllCorruptions(){
+        checkInitials(originalEmployees);
+        checkGender(cleanSet);
+  //      checkForDuplicateIDs(cleanSet);
+   //     checkForFutureDates(cleanSet);
+   //     System.out.println(corruptList);
     }
 
 

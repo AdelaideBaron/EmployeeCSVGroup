@@ -1,5 +1,9 @@
 package com.sparta.ab.model;
 
+import java.util.logging.Level;
+
+import static com.sparta.ab.logging.LogConfig.logger;
+
 public class EmployeeDTO {
 
 
@@ -65,6 +69,7 @@ public class EmployeeDTO {
 
 
     public String getEmpId() {
+        logger.log(Level.FINE, "returning empID");
         return empId;
     }
 
@@ -73,6 +78,7 @@ public class EmployeeDTO {
     }
 
     public String getNamePrefix() {
+        logger.log(Level.FINE, "returning name prefix");
         return namePrefix;
     }
 
@@ -81,6 +87,7 @@ public class EmployeeDTO {
     }
 
     public String getFirstName() {
+        logger.log(Level.FINE, "returning first name");
         return firstName;
     }
 
@@ -89,6 +96,7 @@ public class EmployeeDTO {
     }
 
     public String getMiddleInitial() {
+        logger.log(Level.FINE, "returning middle initial");
         return middleInitial;
     }
 
@@ -97,6 +105,7 @@ public class EmployeeDTO {
     }
 
     public String getLastName() {
+        logger.log(Level.FINE, "returning last name");
         return lastName;
     }
 
@@ -105,6 +114,7 @@ public class EmployeeDTO {
     }
 
     public String getGender() {
+        logger.log(Level.FINE, "returning gender");
         return gender;
     }
 
@@ -113,6 +123,7 @@ public class EmployeeDTO {
     }
 
     public String getEmail() {
+        logger.log(Level.FINE, "returning email");
         return email;
     }
 
@@ -121,6 +132,7 @@ public class EmployeeDTO {
     }
 
     public String getDob() {
+        logger.log(Level.FINE, "returning dob");
         return dob;
     }
 
@@ -129,6 +141,7 @@ public class EmployeeDTO {
     }
 
     public String getDateOfJoining() {
+        logger.log(Level.FINE, "returning date of joining");
         return dateOfJoining;
     }
 
@@ -137,6 +150,7 @@ public class EmployeeDTO {
     }
 
     public String getSalary() {
+        logger.log(Level.FINE, "returning salary");
         return salary;
     }
 

@@ -8,6 +8,7 @@ import java.util.logging.LogRecord;
 public class CustomFormatter extends Formatter {
     //ISO 9601 - 2022-06-07 YYYY-MM-DD
 
+
     @Override
     public String format(LogRecord record) {
         return getDateFormat()
