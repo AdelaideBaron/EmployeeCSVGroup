@@ -3,6 +3,10 @@ package com.sparta.ab;
 
 
 
+import com.sparta.ab.model.EmployeeCollection;
+import com.sparta.ab.model.EmployeeDTO;
+import com.sparta.ab.control.FileIO;
+
 import java.util.ArrayList;
 
 public class App
@@ -13,20 +17,36 @@ public class App
 
         ArrayList<EmployeeDTO> arrayToFilter = FileIO.readFromFile(file);
 
-        //each employee may be access with arrayToFilter.get(n) where n = index, e.g. 0
-        //System.out.println(arrayToFilter.get(0));
+        EmployeeCollection.setEmployees(arrayToFilter);
+        EmployeeCollection.checkInitials();
+        EmployeeCollection.checkGender();
+        EmployeeCollection.checkForFutureDates();
+        EmployeeCollection.checkForDuplicateIDs();
 
-        EmployeeCollection.setEmployees(arrayToFilter); //this sets the data to empDTO
+
+        //this sets the data to empDTO
+        //each employee may be access with arrayToFilter.get(n) where n = index, e.g. System.out.println(arrayToFilter.get(0));
+
 //        System.out.println(EmployeeCollection.getCorruptList());
 //        System.out.println(EmployeeCollection.getCorruptedByFutureDates());
 
         //need a way to pass the 'clean array' through to each next method
 
- //       EmployeeCollection.checkForDuplicateIDs();
- //       System.out.println(EmployeeCollection.getDirtyList());
+
+        //it will firstly need to run on full EmployeeCollection.setEmployees(arrayToFilter)
+
+//        EmployeeDTO employee;
+//        for(employee.getEmpId()) //not in the corrupted list
+      //  System.out.println(EmployeeCollection.getCorruptListElement(0));
+     //   System.out.println(EmployeeCollection.getCorruptListElement(1));
+
+      //  System.out.println(EmployeeCollection.getCorruptedByFutureDates());
+
 
     }
     // 1. loop - one big array of Employees  (for each, remove corrupted) Easy / takes longer
     // 2. while in loop, filter and add to clean array   Harder / faster
 
+
+    //obviously each check for corrupted with affect the other, so need to loop through
 }

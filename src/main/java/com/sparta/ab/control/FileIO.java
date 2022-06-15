@@ -1,4 +1,6 @@
-package com.sparta.ab;
+package com.sparta.ab.control;
+
+import com.sparta.ab.model.EmployeeDTO;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

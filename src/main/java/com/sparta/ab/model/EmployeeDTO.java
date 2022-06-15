@@ -1,4 +1,4 @@
-package com.sparta.ab;
+package com.sparta.ab.model;
 
 public class EmployeeDTO {
 
