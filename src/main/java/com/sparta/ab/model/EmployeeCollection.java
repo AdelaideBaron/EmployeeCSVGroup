@@ -1,7 +1,12 @@
 package com.sparta.ab.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import static com.sparta.ab.logging.LogConfig.logger;
 
@@ -68,23 +73,39 @@ public class EmployeeCollection {
         logger.log(Level.INFO, "All records checked for duplicate empId, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static int getCorruptedByFutureDates(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
-        logger.log(Level.FINE, "Obtain amount of employees with dob in future");
-        checkForFutureDates(employeeListToCheckForCorruptions);
-        return corruptList.size();
+    public static void checkForDuplicateEmails(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.INFO, "Checking for duplicated Emails");
+        int corruptCount = 0;
+        for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            for (EmployeeDTO employeeTwo : employeeListToCheckForCorruptions) {
+                logger.log(Level.FINE, "comparing each employee ID against each other");
+                if (employee != employeeTwo && employee.getEmail().equals(employeeTwo.getEmail())) {
+                    corruptCount++;
+                    corruptList.add(employee);
+                    removeFromClean(employee);
+                } else {
+                    logger.log(Level.FINE, "adding clean data");
+                    cleanSet.add(employee);
+                }
+            }
+        }
+        logger.log(Level.INFO, "All records checked for duplicate Emails, " + corruptCount + " moved to dirty data list.");
     }
 
+
+
+
+
     public static void checkForFutureDates(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
-        logger.log(Level.INFO, "Checking for dob in future");
+        logger.log(Level.INFO, "Checking for date of joining in future");
         //for now, it seems safe to say that anyone with DOB >=2022 is 'corrupt' - check range/dates with customer
         String yearCurrent = new String("2022");
         int corruptCount = 0;
-        int yearCurrents = 2022;
+        LocalDate date = LocalDate.now();
         for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
             logger.log(Level.FINE, "checking individual employeeID");
-            String dob = employee.getDob();
-            String yearOB = dob.substring(6); //will matter if / in there
-            if (Integer.parseInt(yearOB) >= yearCurrents) {
+            LocalDate dob = employee.getDob();
+            if (employee.getDateOfJoining().isAfter(date)) {
                 corruptList.add(employee);
                 corruptCount++;
                 removeFromClean(employee);
@@ -99,49 +120,51 @@ public class EmployeeCollection {
 
     public static int getAmountCorruptedByGender(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
         logger.log(Level.FINE, "Obtain amount of employees with invalid gender");
+
+
         checkGender(employeeListToCheckForCorruptions);
         return corruptList.size();
+
+
     }
 
     public static void checkGender(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
         logger.log(Level.INFO, "Checking for invalid gender");
         int corruptCount = 0;
         for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
-            if (!employee.getGender().equals("F") && employee.getGender().equals("M")) {
+            if (employee.getGender().equals("F") || employee.getGender().equals("M")) {
+                logger.log(Level.FINE, "adding clean data");
+                cleanSet.add(employee);
+            } else {
                 logger.log(Level.FINE, "checking individual employee gender");
                 corruptCount++;
                 corruptList.add(employee);
                 removeFromClean(employee);
-            } else {
-                logger.log(Level.FINE, "adding clean data");
-                cleanSet.add(employee);
             }
         }
         logger.log(Level.INFO, "All records checked for invalid gender, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static int getAmountCorruptedByInitials(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
-        logger.log(Level.FINE, "Obtain amount of employees with invalid intiials");
+    public static int checkInitials(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
+        logger.log(Level.INFO, "Checking for invalid initials");
+        int corruptCount = 0;
+        for (EmployeeDTO employee : employeeListToCheckForCorruptions){
+            if (employee.getMiddleInitial().length() == 1){
+                logger.log(Level.FINE, "adding clean data");
+                cleanSet.add(employee);
+            } else {
+                logger.log(Level.FINE, "checking middle initial");
+                corruptCount++;
+                corruptList.add(employee);
+                removeFromClean(employee);
+            }
+        }
+        logger.log(Level.INFO, "All records checked for 'FALSE' initials, " + corruptCount + " moved to dirty data list.");
         checkInitials(employeeListToCheckForCorruptions);
         return corruptList.size();
     }
 
-    public static void checkInitials(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
-        logger.log(Level.INFO, "Checking for invalid intials");
-        int corruptCount = 0;
-        for(EmployeeDTO employee : employeeListToCheckForCorruptions){
-            if(employee.getMiddleInitial().equals("FALSE")){
-                logger.log(Level.FINE, "checking individual employee initial");
-                corruptCount ++;
-                corruptList.add(employee);
-                removeFromClean(employee);
-            } else {
-                logger.log(Level.FINE, "adding clean data");
-                cleanSet.add(employee);
-            }
-        }
-        logger.log(Level.INFO, "All records checked for 'FALSE' initials, " + corruptCount + " moved to dirty data list.");
-    }
+
 
     private static void removeFromClean(EmployeeDTO employee) {
         logger.log(Level.FINE, "Removing corrupted data from clean list, different corruption found");

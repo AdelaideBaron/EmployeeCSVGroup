@@ -1,5 +1,7 @@
 package com.sparta.ab.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
 import static com.sparta.ab.logging.LogConfig.logger;
@@ -8,16 +10,16 @@ public class EmployeeDTO {
 
 
     // DTO - Data Transfer Object
-    private String empId;
-    private String namePrefix;
-    private String firstName;
-    private String middleInitial;
-    private String lastName;
-    private String gender;
-    private String email;
-    private String dob;
-    private String dateOfJoining;
-    private String salary;
+    String empId;
+    String namePrefix;
+    String firstName;
+    String middleInitial;
+    String lastName;
+    String gender;
+    String email;
+    LocalDate dob;
+    LocalDate dateOfJoining;
+    Integer salary;
 
     public EmployeeDTO(String empId, String namePrefix,
                        String firstName, String middleInitial,
@@ -31,9 +33,9 @@ public class EmployeeDTO {
         this.lastName = lastName;
         this.gender = gender;
         this.email = email;
-        this.dob = dob;
-        this.dateOfJoining = dateOfJoining;
-        this.salary = salary;
+        setDob(dob);
+        setDateOfJoining(dateOfJoining);
+        setSalary(salary);
     }
 
     public EmployeeDTO(String[] argArray) {
@@ -45,27 +47,13 @@ public class EmployeeDTO {
         this.lastName = argArray[4];
         this.gender = argArray[5];
         this.email = argArray[6];
-        this.dob = argArray[7];
-        this.dateOfJoining =  argArray[8];
-        this.salary = argArray[9];
+        this.dob = LocalDate.parse(argArray[7]);
+        this.dateOfJoining = LocalDate.parse(argArray[8]);
+        this.salary = Integer.valueOf(argArray[9]);
     }
 
 
-    @Override
-    public String toString() {
-        return "EmployeeDTO{" +
-                "empId='" + empId + '\'' +
-                ", namePrefix='" + namePrefix + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", middleInitial='" + middleInitial + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", email='" + email + '\'' +
-                ", dob='" + dob + '\'' +
-                ", dateOfJoining='" + dateOfJoining + '\'' +
-                ", salary='" + salary + '\'' +
-                '}';
-    }
+
 
 
     public String getEmpId() {
@@ -131,30 +119,29 @@ public class EmployeeDTO {
         this.email = email;
     }
 
-    public String getDob() {
+    public LocalDate getDob() {
         logger.log(Level.FINE, "returning dob");
         return dob;
     }
 
     public void setDob(String dob) {
-        this.dob = dob;
-    }
+        this.dob = LocalDate.parse(dob, DateTimeFormatter.ofPattern("M[M]/d[d]/yyyy"));}
 
-    public String getDateOfJoining() {
+    public LocalDate getDateOfJoining() {
         logger.log(Level.FINE, "returning date of joining");
         return dateOfJoining;
     }
 
     public void setDateOfJoining(String dateOfJoining) {
-        this.dateOfJoining = dateOfJoining;
+        this.dateOfJoining = LocalDate.parse(dateOfJoining, DateTimeFormatter.ofPattern("M[M]/d[d]/yyyy"));
     }
 
-    public String getSalary() {
+    public Integer getSalary() {
         logger.log(Level.FINE, "returning salary");
         return salary;
     }
 
     public void setSalary(String salary) {
-        this.salary = salary;
+        this.salary = Integer.valueOf(salary);
     }
 }
