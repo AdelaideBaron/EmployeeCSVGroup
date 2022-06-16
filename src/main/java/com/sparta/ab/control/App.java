@@ -3,6 +3,7 @@ package com.sparta.ab.control;
 
 
 
+import com.sparta.ab.crud.CRUD;
 import com.sparta.ab.model.EmployeeCollection;
 import com.sparta.ab.model.EmployeeDTO;
 
@@ -10,7 +11,9 @@ import java.util.ArrayList;
 
 public class App
 {
-    public static void main( String[] args )
+
+
+    public static void main(String[] args )
     {
         String file = "src/main/resources/EmployeeRecordsSecond.csv";
 
@@ -19,6 +22,8 @@ public class App
         EmployeeCollection.setOriginalEmployees(arrayToFilter);
 
         EmployeeCollection.checkAllCorruptions();
+
+        CRUD.main();
 
       //  System.out.println(EmployeeCollection.getSize() ); //checking size of array
 
