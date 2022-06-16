@@ -1,0 +1,56 @@
+2022-06-17T00:32:06.134406 INFO Checking for invalid intials
+2022-06-17T00:32:06.143745 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T00:32:06.144559 INFO Checking for invalid gender
+2022-06-17T00:32:06.147524 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T00:32:06.148271 INFO Checking for duplicated emails
+2022-06-17T00:32:09.754475 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T00:32:09.755366 INFO Checking for duplicated IDs
+2022-06-17T00:32:12.887295 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T00:32:12.888193 INFO Checking for dob in future
+2022-06-17T00:32:12.895148 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T00:32:12.895917 INFO Obtain array of corrupt employee entries
+2022-06-17T00:32:12.896514 INFO  219 corruptions located.
+2022-06-17T00:32:12.897074 INFO Creating clean list
+2022-06-17T00:32:12.985348 INFO Clean list created: 9781 employees added.
+2022-06-17T00:33:45.141869 INFO Checking for invalid intials
+2022-06-17T00:33:45.148347 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T00:33:45.149234 INFO Checking for invalid gender
+2022-06-17T00:33:45.152548 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T00:33:45.153487 INFO Checking for duplicated emails
+2022-06-17T00:33:48.043519 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T00:33:48.0444 INFO Checking for duplicated IDs
+2022-06-17T00:33:50.491253 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T00:33:50.492069 INFO Checking for dob in future
+2022-06-17T00:33:50.498621 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T00:33:50.499301 INFO Obtain array of corrupt employee entries
+2022-06-17T00:33:50.499826 INFO  219 corruptions located.
+2022-06-17T00:33:50.500444 INFO Creating clean list
+2022-06-17T00:33:50.580232 INFO Clean list created: 9781 employees added.
+2022-06-17T00:34:55.657799 INFO Checking for invalid intials
+2022-06-17T00:34:55.665259 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T00:34:55.666327 INFO Checking for invalid gender
+2022-06-17T00:34:55.670402 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T00:34:55.671284 INFO Checking for duplicated emails
+2022-06-17T00:34:59.913364 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T00:34:59.914874 INFO Checking for duplicated IDs
+2022-06-17T00:35:03.460854 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T00:35:03.461683 INFO Checking for dob in future
+2022-06-17T00:35:03.468607 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T00:35:03.469353 INFO Obtain array of corrupt employee entries
+2022-06-17T00:35:03.469871 INFO  219 corruptions located.
+2022-06-17T00:35:03.470368 INFO Creating clean list
+2022-06-17T00:35:03.560964 INFO Clean list created: 9781 employees added.
+2022-06-17T00:36:03.835617 INFO Checking for invalid intials
+2022-06-17T00:36:03.841527 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T00:36:03.842387 INFO Checking for invalid gender
+2022-06-17T00:36:03.845461 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T00:36:03.846293 INFO Checking for duplicated emails
+2022-06-17T00:36:07.206535 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T00:36:07.207427 INFO Checking for duplicated IDs
+2022-06-17T00:36:09.969693 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T00:36:09.970763 INFO Checking for dob in future
+2022-06-17T00:36:09.981724 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T00:36:09.982515 INFO Obtain array of corrupt employee entries
+2022-06-17T00:36:09.983096 INFO  219 corruptions located.
+2022-06-17T00:36:09.983696 INFO Creating clean list
+2022-06-17T00:36:10.144164 INFO Clean list created: 9781 employees added.

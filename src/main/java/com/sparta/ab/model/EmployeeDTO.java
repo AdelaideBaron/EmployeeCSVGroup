@@ -1,4 +1,8 @@
-package com.sparta.ab;
+package com.sparta.ab.model;
+
+import java.util.logging.Level;
+
+import static com.sparta.ab.logging.LogConfig.logger;
 
 public class EmployeeDTO {
 
@@ -65,78 +69,35 @@ public class EmployeeDTO {
 
 
     public String getEmpId() {
+        logger.log(Level.FINE, "returning empID");
         return empId;
     }
 
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-
-    public String getNamePrefix() {
-        return namePrefix;
-    }
-
-    public void setNamePrefix(String namePrefix) {
-        this.namePrefix = namePrefix;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getMiddleInitial() {
+        logger.log(Level.FINE, "returning middle initial");
         return middleInitial;
     }
 
-    public void setMiddleInitial(String middleInitial) {
-        this.middleInitial = middleInitial;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getGender() {
+        logger.log(Level.FINE, "returning gender");
         return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
     }
-
     public String getEmail() {
+        logger.log(Level.FINE, "returning email");
         return email;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getDob() {
+        logger.log(Level.FINE, "returning dob");
         return dob;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getDateOfJoining() {
-        return dateOfJoining;
-    }
-
-    public void setDateOfJoining(String dateOfJoining) {
-        this.dateOfJoining = dateOfJoining;
-    }
-
     public String getSalary() {
+        logger.log(Level.FINE, "returning salary");
         return salary;
     }
 
