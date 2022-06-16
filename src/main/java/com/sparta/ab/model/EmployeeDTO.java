@@ -73,45 +73,11 @@ public class EmployeeDTO {
         return empId;
     }
 
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-
-    public String getNamePrefix() {
-        logger.log(Level.FINE, "returning name prefix");
-        return namePrefix;
-    }
-
-    public void setNamePrefix(String namePrefix) {
-        this.namePrefix = namePrefix;
-    }
-
-    public String getFirstName() {
-        logger.log(Level.FINE, "returning first name");
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getMiddleInitial() {
         logger.log(Level.FINE, "returning middle initial");
         return middleInitial;
     }
 
-    public void setMiddleInitial(String middleInitial) {
-        this.middleInitial = middleInitial;
-    }
-
-    public String getLastName() {
-        logger.log(Level.FINE, "returning last name");
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getGender() {
         logger.log(Level.FINE, "returning gender");
@@ -121,32 +87,13 @@ public class EmployeeDTO {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
     public String getEmail() {
         logger.log(Level.FINE, "returning email");
         return email;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getDob() {
         logger.log(Level.FINE, "returning dob");
         return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getDateOfJoining() {
-        logger.log(Level.FINE, "returning date of joining");
-        return dateOfJoining;
-    }
-
-    public void setDateOfJoining(String dateOfJoining) {
-        this.dateOfJoining = dateOfJoining;
     }
 
     public String getSalary() {

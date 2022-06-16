@@ -15,15 +15,12 @@ public class LogConfig {
             try {
                 //fill path - content root in below parentheses
                 Handler fileHandler = new FileHandler("src/main/java/com/sparta/ab/logging/log.log", true);
-              //  logger.setFilter(new CustomFormatter());
                 logger.addHandler(fileHandler);
                 fileHandler.setFormatter(new CustomFormatter());
             } catch (
                     IOException e) {
                 throw new RuntimeException(e);
             }
-           // logger.setLevel(Level.INFO);
-            //perhaps integrate the above with user input filter
         }
     }
 

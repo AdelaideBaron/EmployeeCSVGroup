@@ -14,13 +14,7 @@ public class LoggingLevelInOut {
     public LoggingLevelInOut() {
     }
 
-    public static void main(String[] args) {
-        LoggingLevelInOut loggingLevelInOut = new LoggingLevelInOut();
-        // printer.getlevelChoice();
-     //   String levelChoice = printer.getlevelChoice();
-    //    System.out.println(levelChoice);
 
-    }
 
     public Level getlevelChoice() {
         logger.log(Level.INFO, "getting level");

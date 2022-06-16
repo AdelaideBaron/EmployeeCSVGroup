@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 
 import static com.sparta.ab.logging.LogConfig.logger;
 
+//in progress
+
 public class EmployeesWriter {
 
     private static Logger logger = Logger.getLogger("my logger");
