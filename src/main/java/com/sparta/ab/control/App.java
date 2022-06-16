@@ -17,16 +17,8 @@ public class App
         ArrayList<EmployeeDTO> arrayToFilter = FileIO.readFromFile(file);
 
         EmployeeCollection.setOriginalEmployees(arrayToFilter);
-
         EmployeeCollection.checkAllCorruptions();
 
-      //  System.out.println(EmployeeCollection.getSize() ); //checking size of array
-
-
-  //      EmployeeCollection.checkInitials();
-//        EmployeeCollection.checkGender();
- //       EmployeeCollection.checkForFutureDates();
- //       EmployeeCollection.checkForDuplicateIDs();
 
 
         //this sets the data to empDTO
