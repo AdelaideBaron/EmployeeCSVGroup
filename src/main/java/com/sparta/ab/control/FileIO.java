@@ -16,7 +16,7 @@ public class FileIO {
     public static ArrayList<EmployeeDTO> readFromFile(String filename) {
         logger.log(Level.INFO, "Reading from CSV file");
 
-        ArrayList<EmployeeDTO> arrayToSort = new ArrayList<>();
+        ArrayList<EmployeeDTO> employees = new ArrayList<>();
         try {
             // Decorator pattern:
             FileReader fileReader = new FileReader(filename);
@@ -27,7 +27,8 @@ public class FileIO {
             for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
                 logger.log(Level.FINER, "Splitting the CSV by comma entries, creating employeeDTO");
                 String[] args = line.split(",");
-                arrayToSort.add(new EmployeeDTO(args)); //each line of array is an employeeDTO
+                EmployeeDTO currentEmployee = new EmployeeDTO(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
+            employees.add(currentEmployee);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -36,7 +37,7 @@ public class FileIO {
         }
 
 
-        return arrayToSort;
+        return employees;
 
     }
 }
