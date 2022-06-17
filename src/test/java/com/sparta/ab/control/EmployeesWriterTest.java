@@ -5,8 +5,6 @@ import com.sparta.ab.model.EmployeeDTO;
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class EmployeesWriterTest {
 
 //    @BeforeAll
@@ -105,7 +103,7 @@ class EmployeesWriterTest {
         EmployeeCollection.setOriginalEmployees(arrayToFilter);
         EmployeeCollection.checkAllCorruptions();
         EmployeeCollection.createCleanList();
-        EmployeeCollection.insertEmptodb();
+        EmployeeCollection.insertEmptoDb();
         long enTime = EmployeeCollection.getTime();
         long elapsedTime = enTime - stTime;
         System.out.println("Time taken to process the input file, filter and load the clean rec to db : "+ elapsedTime / 1000000000 + " sec" );

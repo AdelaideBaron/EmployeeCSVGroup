@@ -2,6 +2,7 @@ package com.sparta.ab.jdbc;
 
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class EmployeeDAO {
     private Connection connection;
@@ -57,9 +58,9 @@ public class EmployeeDAO {
                                String lastName,
                                String gender,
                                String email,
-                               String dob,
-                               String dateOfJoining,
-                               String salary) {
+                               LocalDate dob,
+                               LocalDate dateOfJoining,
+                               Integer salary) {
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.INSERT_INTO_DB);
@@ -70,9 +71,9 @@ public class EmployeeDAO {
             preparedStatement.setString(5, lastName);
             preparedStatement.setString(6, gender);
             preparedStatement.setString(7, email);
-            preparedStatement.setString(8, dob);
-            preparedStatement.setString(9,dateOfJoining);
-            preparedStatement.setString(10, salary);
+            preparedStatement.setDate(8, Date.valueOf(dob));
+            preparedStatement.setDate(9, Date.valueOf(dateOfJoining));
+            preparedStatement.setInt(10, salary);
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
