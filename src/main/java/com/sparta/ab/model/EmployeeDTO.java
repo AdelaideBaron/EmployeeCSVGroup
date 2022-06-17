@@ -96,9 +96,24 @@ public class EmployeeDTO {
         return dob;
     }
 
+    public String getDoj() {
+        logger.log(Level.FINE, "returning doj");
+        return dob;
+    }
+
     public String getSalary() {
         logger.log(Level.FINE, "returning salary");
         return salary;
+    }
+
+    public String getFirstName() {
+        logger.log(Level.FINE, "returning firstname");
+        return firstName;
+    }
+
+    public String getLastName() {
+        logger.log(Level.FINE, "returning lastname");
+        return lastName;
     }
 
     public void setSalary(String salary) {
