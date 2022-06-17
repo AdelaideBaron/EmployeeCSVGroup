@@ -54,3 +54,84 @@
 2022-06-17T00:36:09.983096 INFO  219 corruptions located.
 2022-06-17T00:36:09.983696 INFO Creating clean list
 2022-06-17T00:36:10.144164 INFO Clean list created: 9781 employees added.
+2022-06-17T11:43:00.832863 INFO Checking for invalid intials
+2022-06-17T11:43:00.9718786 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T11:43:00.9718786 INFO Checking for invalid gender
+2022-06-17T11:43:00.9758795 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T11:43:00.9778778 INFO Checking for duplicated emails
+2022-06-17T11:43:02.9353209 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T11:43:02.9363153 INFO Checking for duplicated IDs
+2022-06-17T11:43:04.0951726 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T11:43:04.0961645 INFO Checking for dob in future
+2022-06-17T11:43:04.1021691 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T11:43:04.1031758 INFO Checking for invalid doj
+2022-06-17T11:43:04.1191774 INFO All records checked for valid dateof birth, 4514 moved to dirty data list.
+2022-06-17T11:43:04.1201664 INFO Checking for invalid dob
+2022-06-17T11:43:04.1331841 INFO All records checked for valid dateof birth, 4514 moved to dirty data list.
+2022-06-17T11:43:04.1331841 INFO Checking for invalid dob with respect to doj and current date
+2022-06-17T11:43:04.2291907 INFO All records checked for dob before doj and current date, 1 moved to dirty data list.
+2022-06-17T11:43:04.2301906 INFO Checking for invalid Salary Amount
+2022-06-17T11:43:04.234192 INFO All records checked for valid salary, 9 moved to dirty data list.
+2022-06-17T11:43:04.234192 INFO Obtain array of corrupt employee entries
+2022-06-17T11:43:04.2351921 INFO  4646 corruptions located.
+2022-06-17T11:43:04.2351921 INFO Creating clean list
+2022-06-17T11:43:05.2228239 INFO Clean list created: 5354 employees added.
+2022-06-17T11:43:37.3844348 INFO Checking for invalid intials
+2022-06-17T11:43:37.3954371 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T11:43:37.3954371 INFO Checking for invalid gender
+2022-06-17T11:43:37.4004314 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T11:43:37.4014327 INFO Checking for duplicated emails
+2022-06-17T11:43:40.1390547 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T11:43:40.1400478 INFO Checking for duplicated IDs
+2022-06-17T11:43:41.3033233 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T11:43:41.3033233 INFO Checking for dob in future
+2022-06-17T11:43:41.3103154 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T11:43:41.3103154 INFO Checking for invalid doj
+2022-06-17T11:43:41.3243139 INFO All records checked for valid dateof birth, 4514 moved to dirty data list.
+2022-06-17T11:43:41.3263149 INFO Checking for invalid dob
+2022-06-17T11:43:41.3603245 INFO All records checked for valid dateof birth, 4514 moved to dirty data list.
+2022-06-17T11:43:41.3613239 INFO Checking for invalid dob with respect to doj and current date
+2022-06-17T11:43:41.4853547 INFO All records checked for dob before doj and current date, 1 moved to dirty data list.
+2022-06-17T11:43:41.4873509 INFO Checking for invalid Salary Amount
+2022-06-17T11:43:41.5003551 INFO All records checked for valid salary, 9 moved to dirty data list.
+2022-06-17T11:43:41.5023549 INFO Obtain array of corrupt employee entries
+2022-06-17T11:43:41.5023549 INFO  4646 corruptions located.
+2022-06-17T11:43:41.5033546 INFO Creating clean list
+2022-06-17T11:43:42.5245974 INFO Clean list created: 5354 employees added.
+2022-06-17T11:45:33.9099731 INFO Checking for invalid intials
+2022-06-17T11:45:33.9199751 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T11:45:33.9199751 INFO Checking for invalid gender
+2022-06-17T11:45:33.9239759 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T11:45:33.9249761 INFO Checking for duplicated emails
+2022-06-17T11:45:35.8128055 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T11:45:35.8138122 INFO Checking for duplicated IDs
+2022-06-17T11:45:36.9881706 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T11:45:36.9891648 INFO Checking for dob in future
+2022-06-17T11:45:36.9961654 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T11:45:36.9961654 INFO Checking for invalid dob with respect to doj and current date
+2022-06-17T11:45:37.1081873 INFO All records checked for dob before doj and current date, 1 moved to dirty data list.
+2022-06-17T11:45:37.1091898 INFO Checking for invalid Salary Amount
+2022-06-17T11:45:37.1141883 INFO All records checked for valid salary, 9 moved to dirty data list.
+2022-06-17T11:45:37.1141883 INFO Obtain array of corrupt employee entries
+2022-06-17T11:45:37.1151907 INFO  228 corruptions located.
+2022-06-17T11:45:37.1151907 INFO Creating clean list
+2022-06-17T11:45:37.1902073 INFO Clean list created: 9772 employees added.
+2022-06-17T12:08:12.431779 INFO Checking for invalid intials
+2022-06-17T12:08:12.4407808 INFO All records checked for 'FALSE' initials, 14 moved to dirty data list.
+2022-06-17T12:08:12.4417819 INFO Checking for invalid gender
+2022-06-17T12:08:12.4467819 INFO All records checked for invalid gender, 51 moved to dirty data list.
+2022-06-17T12:08:12.4477829 INFO Checking for duplicated emails
+2022-06-17T12:08:14.3132096 INFO All records checked for duplicate email, 40 moved to dirty data list.
+2022-06-17T12:08:14.3142165 INFO Checking for duplicated IDs
+2022-06-17T12:08:15.4934684 INFO All records checked for duplicate empId, 114 moved to dirty data list.
+2022-06-17T12:08:15.4934684 INFO Checking for dob in future
+2022-06-17T12:08:15.4994699 INFO All records checked for dob in future, 1 moved to dirty data list.
+2022-06-17T12:08:15.5004721 INFO Checking for invalid dob with respect to doj and current date
+2022-06-17T12:08:15.6044926 INFO All records checked for dob before doj and current date, 1 moved to dirty data list.
+2022-06-17T12:08:15.605495 INFO Checking for invalid Salary Amount
+2022-06-17T12:08:15.6104966 INFO All records checked for valid salary, 9 moved to dirty data list.
+2022-06-17T12:08:15.6104966 INFO Obtain array of corrupt employee entries
+2022-06-17T12:08:15.6114943 INFO  228 corruptions located.
+2022-06-17T12:08:15.6114943 INFO Creating clean list
+2022-06-17T12:08:15.6835097 INFO Clean list created: 9772 employees added.
+2022-06-17T12:08:16.278862 INFO Obtain array of corrupt employee entries

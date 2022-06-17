@@ -143,7 +143,7 @@ public class EmployeeCollection {
 
     public static void checkdatecomparison(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
         logger.log(Level.INFO, "Checking for invalid dob with respect to doj and current date");
-        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         int corruptCount = 0;
         for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
             String[] dobd = employee.getDob().split("/");
@@ -192,8 +192,8 @@ public class EmployeeCollection {
         checkForDuplicateEmails(originalEmployees);
         checkForDuplicateIDs(originalEmployees);
         checkForFutureDates(originalEmployees);
-        checkDojvalid(originalEmployees);
-        checkDobvalid(originalEmployees);
+        //checkDojvalid(originalEmployees);
+        //checkDobvalid(originalEmployees);
         checkdatecomparison(originalEmployees);
         checkSalaryInvalid(originalEmployees);
         logger.log(Level.INFO, " " + getCorruptList().size() + " corruptions located.");
@@ -237,6 +237,9 @@ public class EmployeeCollection {
                     emp.getSalary());
             recCnt++;
         }
+        //if (recCnt % 50 > 0) {
+            //employeeDAO.runBatch();
+        //}
         logger.log(Level.INFO, "All records in the input file loaded into database, Total records :  " + recCnt);
     }
 
@@ -246,6 +249,7 @@ public class EmployeeCollection {
     }
 
     public static long getTime() {
+
         return System.nanoTime();
     }
 

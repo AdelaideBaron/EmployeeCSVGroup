@@ -6,6 +6,8 @@ import java.sql.*;
 public class EmployeeDAO {
     private Connection connection;
     private Statement statement;
+    private int cMax = 0;
+    PreparedStatement preparedStatement;
 
     public EmployeeDAO(Connection connection) {
         this.connection = connection;
@@ -62,7 +64,7 @@ public class EmployeeDAO {
                                String salary) {
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.INSERT_INTO_DB);
+            preparedStatement = connection.prepareStatement(SQLQueries.INSERT_INTO_DB);
             preparedStatement.setString(1, empId);
             preparedStatement.setString(2, namePrefix);
             preparedStatement.setString(3, firstName);
@@ -73,11 +75,20 @@ public class EmployeeDAO {
             preparedStatement.setString(8, dob);
             preparedStatement.setString(9,dateOfJoining);
             preparedStatement.setString(10, salary);
-            preparedStatement.execute();
+            //cMax++;
+            //if (cMax >= 50) {
+                preparedStatement.execute();
+            //} else {
+               //preparedStatement.addBatch();
+            //}
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
+
 
     public void truncateTable() {
         try {
