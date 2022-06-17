@@ -1,7 +1,12 @@
 package com.sparta.ab.model;
 
+import com.sparta.ab.jdbc.ConnectionManager;
+import com.sparta.ab.jdbc.EmployeeDAO;
+
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.logging.Level;
 
@@ -110,7 +115,71 @@ public class EmployeeCollection {
         logger.log(Level.INFO, "All records checked for 'FALSE' initials, " + corruptCount + " moved to dirty data list.");
     }
 
+    public static void checkDobvalid(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        int corruptCount = 0;
+        logger.log(Level.INFO, "Checking for invalid dob");
+        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            String[] date = employee.getDoj().split("/");
+            if (date[0].length() != 2) {
+                corruptCount++;
+                corruptList.add(employee);
+            }
+        }
+        logger.log(Level.INFO, "All records checked for valid dateof birth, " + corruptCount + " moved to dirty data list.");
+    }
 
+    public static void checkDojvalid(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        int corruptCount = 0;
+        logger.log(Level.INFO, "Checking for invalid doj");
+        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            String[] date = employee.getDoj().split("/");
+            if (date[0].length() != 2) {
+                corruptCount++;
+                corruptList.add(employee);
+            }
+        }
+        logger.log(Level.INFO, "All records checked for valid dateof birth, " + corruptCount + " moved to dirty data list.");
+    }
+
+    public static void checkdatecomparison(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
+        logger.log(Level.INFO, "Checking for invalid dob with respect to doj and current date");
+        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+        int corruptCount = 0;
+        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            String[] dobd = employee.getDob().split("/");
+            String[] dojd = employee.getDoj().split("/");
+            if (dobd[0].length() == 2 && dojd[0].length() == 2) {
+                Date dob = null;
+                Date doj = null;
+                try {
+                    dob = sdf.parse(employee.getDob());
+                    doj = sdf.parse(employee.getDoj());
+                    Date now = new Date();
+                    if ((dob.after(doj)) || dob.after(now)) {
+                        corruptCount++;
+                        corruptList.add(employee);
+                    }
+                } catch (Exception e) {
+                    corruptCount++;
+                    corruptList.add(employee);
+                }
+            }
+        }
+        logger.log(Level.INFO, "All records checked for dob before doj and current date, " + corruptCount + " moved to dirty data list.");
+    }
+
+    public static void checkSalaryInvalid(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.INFO, "Checking for invalid Salary Amount");
+        int corruptCount = 0;
+        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            int sal = Integer.parseInt(employee.getSalary());
+            if (sal <= 0) {
+                corruptCount++;
+                corruptList.add(employee);
+            }
+        }
+        logger.log(Level.INFO, "All records checked for valid salary, " + corruptCount + " moved to dirty data list.");
+    }
 
     public static int getSize(ArrayList<EmployeeDTO> employeeListToSize) {
         logger.log(Level.INFO, "Obtain amount of employees");
@@ -123,6 +192,10 @@ public class EmployeeCollection {
         checkForDuplicateEmails(originalEmployees);
         checkForDuplicateIDs(originalEmployees);
         checkForFutureDates(originalEmployees);
+        checkDojvalid(originalEmployees);
+        checkDobvalid(originalEmployees);
+        checkdatecomparison(originalEmployees);
+        checkSalaryInvalid(originalEmployees);
         logger.log(Level.INFO, " " + getCorruptList().size() + " corruptions located.");
     }
 
@@ -138,8 +211,43 @@ public class EmployeeCollection {
                }
             }
         }
-
         logger.log(Level.INFO, "Clean list created: " + cleanSet.size() + " employees added.");
     }
+
+    public static void insertEmptodb() {
+        int recCnt = 0;
+
+        EmployeeDAO employeeDAO = new EmployeeDAO(ConnectionManager.getConnection());
+
+        //Clear the table before inserting new records from the input file
+        employeeDAO.truncateTable();
+
+        //Loop through the cleanset of Arraylist and insert it into employees table
+        for (EmployeeDTO emp : cleanSet) {
+
+            employeeDAO.insertEmployee(emp.getEmpId(),
+                    emp.getEmpId(),
+                    emp.getFirstName(),
+                    emp.getMiddleInitial(),
+                    emp.getLastName(),
+                    emp.getGender(),
+                    emp.getEmail(),
+                    emp.getDob(),
+                    emp.getDoj(),
+                    emp.getSalary());
+            recCnt++;
+        }
+        logger.log(Level.INFO, "All records in the input file loaded into database, Total records :  " + recCnt);
+    }
+
+    public static int getEmpRecCntfromDB() {
+        EmployeeDAO employeeDAO = new EmployeeDAO(ConnectionManager.getConnection());
+        return employeeDAO.getdbEmpRec();
+    }
+
+    public static long getTime() {
+        return System.nanoTime();
+    }
+
 }
 
