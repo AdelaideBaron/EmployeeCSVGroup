@@ -84,23 +84,7 @@ public class EmployeeCollection {
         logger.log(Level.INFO, "All records checked for dob in future, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static void checkForFutureDoj(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
-        logger.log(Level.INFO, "Checking for doj in future");
-        int corruptCount = 0;
-        LocalDate date = LocalDate.now();
-        System.out.println(date);
-        for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
-            logger.log(Level.FINE, "checking individual employeeID");
-            LocalDate doj = employee.getDoj();
-            if (employee.getDoj().isAfter(date)) {
-                corruptList.add(employee);
-                corruptCount++;
 
-            }
-        }
-
-        logger.log(Level.INFO, "All records checked for doj in future, " + corruptCount + " moved to dirty data list.");
-    }
     public static void checkNegativeSalaries(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
         logger.log(Level.INFO, "Checking for negative salaries");
         int corruptCount = 0;
@@ -143,6 +127,34 @@ public class EmployeeCollection {
 
 
 
+    public static void checkdatecomparison(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
+        logger.log(Level.INFO, "Checking for invalid dob with respect to doj and current date");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        int corruptCount = 0;
+        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            String[] dobd = employee.getDob().split("/");
+            String[] dojd = employee.getDoj().split("/");
+            if (dobd[0].length() == 2 && dojd[0].length() == 2) {
+                Date dob = null;
+                Date doj = null;
+                try {
+                    dob = sdf.parse(employee.getDob());
+                    doj = sdf.parse(employee.getDoj());
+                    Date now = new Date();
+                    if ((dob.after(doj)) || dob.after(now)) {
+                        corruptCount++;
+                        corruptList.add(employee);
+                    }
+                } catch (Exception e) {
+                    corruptCount++;
+                    corruptList.add(employee);
+                }
+            }
+        }
+        logger.log(Level.INFO, "All records checked for dob before doj and current date, " + corruptCount + " moved to dirty data list.");
+    }
+
+
 
 
     public static int getSize(ArrayList<EmployeeDTO> employeeListToSize) {
@@ -155,9 +167,11 @@ public class EmployeeCollection {
         checkGender(originalEmployees);
         checkForDuplicateEmails(originalEmployees);
         checkForDuplicateIDs(originalEmployees);
-        checkForFutureDob(originalEmployees);
-        checkForFutureDoj(originalEmployees);
+        checkForFutureDates(originalEmployees);
+        checkdatecomparison(originalEmployees);
+        checkSalaryInvalid(originalEmployees);
         checkNegativeSalaries(originalEmployees);
+
         logger.log(Level.INFO, " " + getCorruptList().size() + " corruptions located.");
     }
 
@@ -199,7 +213,7 @@ public class EmployeeCollection {
                     emp.getSalary());
             recCnt++;
         }
-        logger.log(Level.INFO, "All records in the input file loaded into database, Total records :  " + recCnt);
+               logger.log(Level.INFO, "All records in the input file loaded into database, Total records :  " + recCnt);
     }
 
     public static int getEmpRecCntfromDB() {
@@ -208,6 +222,7 @@ public class EmployeeCollection {
     }
 
     public static long getTime() {
+
         return System.nanoTime();
     }
 

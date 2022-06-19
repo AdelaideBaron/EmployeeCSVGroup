@@ -17,7 +17,7 @@ public class controller
     {
         loggingLevelControl(); //it is working, but doesn't seem to be filtering correctly?
         //perhaps only filtering in this class... maybe need to parse to others
-
+        long start = EmployeeCollection.getTime();
         String file = "src/main/resources/EmployeeRecordsSecond.csv";
 
         ArrayList<EmployeeDTO> arrayToFilter = FileIO.readFromFile(file);
@@ -25,6 +25,13 @@ public class controller
         EmployeeCollection.setOriginalEmployees(arrayToFilter);
         EmployeeCollection.checkAllCorruptions();
         EmployeeCollection.createCleanList();
+        EmployeeCollection.getEmpRecCntfromDB();
+        logger.log(Level.INFO, "Adding corrupt employees to CSV");
+        EmployeesWriter employeesWriter = new EmployeesWriter("src/main/resources/corruptemployee.csv");
+        employeesWriter.writeEmployeesToCSV(EmployeeCollection.getCorruptList());
+        long end = EmployeeCollection.getTime();
+        long totaltime = (end-start)/1000000000;
+        System.out.println("Total time:" + totaltime +"sec");
 
     }
 
