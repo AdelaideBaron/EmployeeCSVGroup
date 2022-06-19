@@ -3,10 +3,8 @@ package com.sparta.ab.model;
 import com.sparta.ab.jdbc.ConnectionManager;
 import com.sparta.ab.jdbc.EmployeeDAO;
 
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.logging.Level;
 
@@ -68,16 +66,15 @@ public class EmployeeCollection {
         logger.log(Level.INFO, "All records checked for duplicate email, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static void checkForFutureDates(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+    public static void checkForFutureDob(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
         logger.log(Level.INFO, "Checking for dob in future");
-        //for now, it seems safe to say that anyone with DOB >=2022 is 'corrupt' - check range/dates with customer
         int corruptCount = 0;
-        int yearCurrents = 2022;
+        LocalDate date = LocalDate.now();
+        System.out.println(date);
         for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
             logger.log(Level.FINE, "checking individual employeeID");
-            String dob = employee.getDob();
-            String yearOB = dob.substring(6);
-            if (Integer.parseInt(yearOB) >= yearCurrents) {
+            LocalDate dob = employee.getDob();
+            if (employee.getDob().isAfter(date)) {
                 corruptList.add(employee);
                 corruptCount++;
 
@@ -85,6 +82,19 @@ public class EmployeeCollection {
         }
 
         logger.log(Level.INFO, "All records checked for dob in future, " + corruptCount + " moved to dirty data list.");
+    }
+
+
+    public static void checkNegativeSalaries(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
+        logger.log(Level.INFO, "Checking for negative salaries");
+        int corruptCount = 0;
+        for (EmployeeDTO employee : employeeListToCheckForCorruptions) {
+            if (employee.getSalary() < 0) {
+                corruptCount++;
+                corruptList.add(employee);
+            }
+        }
+        logger.log(Level.INFO, "All records checked for negative salaries, " + corruptCount + " moved to dirty data list.");
     }
 
     public static void checkGender(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
@@ -115,31 +125,7 @@ public class EmployeeCollection {
         logger.log(Level.INFO, "All records checked for 'FALSE' initials, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static void checkDobvalid(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
-        int corruptCount = 0;
-        logger.log(Level.INFO, "Checking for invalid dob");
-        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
-            String[] date = employee.getDoj().split("/");
-            if (date[0].length() != 2) {
-                corruptCount++;
-                corruptList.add(employee);
-            }
-        }
-        logger.log(Level.INFO, "All records checked for valid dateof birth, " + corruptCount + " moved to dirty data list.");
-    }
 
-    public static void checkDojvalid(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
-        int corruptCount = 0;
-        logger.log(Level.INFO, "Checking for invalid doj");
-        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
-            String[] date = employee.getDoj().split("/");
-            if (date[0].length() != 2) {
-                corruptCount++;
-                corruptList.add(employee);
-            }
-        }
-        logger.log(Level.INFO, "All records checked for valid dateof birth, " + corruptCount + " moved to dirty data list.");
-    }
 
     public static void checkdatecomparison(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions){
         logger.log(Level.INFO, "Checking for invalid dob with respect to doj and current date");
@@ -168,18 +154,8 @@ public class EmployeeCollection {
         logger.log(Level.INFO, "All records checked for dob before doj and current date, " + corruptCount + " moved to dirty data list.");
     }
 
-    public static void checkSalaryInvalid(ArrayList<EmployeeDTO> employeeListToCheckForCorruptions) {
-        logger.log(Level.INFO, "Checking for invalid Salary Amount");
-        int corruptCount = 0;
-        for(EmployeeDTO employee : employeeListToCheckForCorruptions) {
-            int sal = Integer.parseInt(employee.getSalary());
-            if (sal <= 0) {
-                corruptCount++;
-                corruptList.add(employee);
-            }
-        }
-        logger.log(Level.INFO, "All records checked for valid salary, " + corruptCount + " moved to dirty data list.");
-    }
+
+
 
     public static int getSize(ArrayList<EmployeeDTO> employeeListToSize) {
         logger.log(Level.INFO, "Obtain amount of employees");
@@ -192,10 +168,10 @@ public class EmployeeCollection {
         checkForDuplicateEmails(originalEmployees);
         checkForDuplicateIDs(originalEmployees);
         checkForFutureDates(originalEmployees);
-        //checkDojvalid(originalEmployees);
-        //checkDobvalid(originalEmployees);
         checkdatecomparison(originalEmployees);
         checkSalaryInvalid(originalEmployees);
+        checkNegativeSalaries(originalEmployees);
+
         logger.log(Level.INFO, " " + getCorruptList().size() + " corruptions located.");
     }
 
@@ -214,7 +190,7 @@ public class EmployeeCollection {
         logger.log(Level.INFO, "Clean list created: " + cleanSet.size() + " employees added.");
     }
 
-    public static void insertEmptodb() {
+    public static void insertEmptoDb() {
         int recCnt = 0;
 
         EmployeeDAO employeeDAO = new EmployeeDAO(ConnectionManager.getConnection());
@@ -237,10 +213,7 @@ public class EmployeeCollection {
                     emp.getSalary());
             recCnt++;
         }
-        //if (recCnt % 50 > 0) {
-            //employeeDAO.runBatch();
-        //}
-        logger.log(Level.INFO, "All records in the input file loaded into database, Total records :  " + recCnt);
+               logger.log(Level.INFO, "All records in the input file loaded into database, Total records :  " + recCnt);
     }
 
     public static int getEmpRecCntfromDB() {
